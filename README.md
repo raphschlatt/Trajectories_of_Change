@@ -5,11 +5,10 @@
 [![CI](https://github.com/raphschlatt/Trajectories_of_Change/actions/workflows/ci.yml/badge.svg)](https://github.com/raphschlatt/Trajectories_of_Change/actions/workflows/ci.yml)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/raphschlatt/Trajectories_of_Change/blob/main/examples/quickstart_colab.ipynb)
 
-Trajectories of Change measures how individual authors move relative to their
+`Trajectories_of_Change` measures how individual authors move relative to their
 research field over time. It takes a corpus of publications and their cited
-references and computes trajectories for a target author or groups of authors
-across four measures, through a Python API and a `toc` command line. The
-package is domain agnostic and runs on any publication dataset that follows
+references and computes trajectories for a target author or a group of authors
+across four measures. The package is domain agnostic and runs on any publication dataset that follows
 its input format. It implements the measures introduced in
 [Trajectories of Change: Approaches for Tracking Knowledge Evolution](https://arxiv.org/abs/2501.00391)
 and the complete pipeline of a follow-up study (see [Citing](#citing)).
