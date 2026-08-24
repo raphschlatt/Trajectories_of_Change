@@ -13,6 +13,11 @@ authors:
     affiliation: "Max Planck Institute of Geoanthropology"
 version: "0.2.0"
 date-released: "2026-08-24"
+doi: "10.5281/zenodo.22084878"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22084879"
+    description: "Zenodo archive of version 0.2.0"
 license: MIT
 repository-code: "https://github.com/raphschlatt/Trajectories_of_Change"
 url: "https://github.com/raphschlatt/Trajectories_of_Change"

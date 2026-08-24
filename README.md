@@ -3,6 +3,7 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/)
 [![License MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/raphschlatt/Trajectories_of_Change/blob/main/LICENSE)
 [![CI](https://github.com/raphschlatt/Trajectories_of_Change/actions/workflows/ci.yml/badge.svg)](https://github.com/raphschlatt/Trajectories_of_Change/actions/workflows/ci.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22084878.svg)](https://doi.org/10.5281/zenodo.22084878)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/raphschlatt/Trajectories_of_Change/blob/main/examples/quickstart_colab.ipynb)
 
 `Trajectories_of_Change` measures how individual authors move relative to their
@@ -181,9 +182,11 @@ in
 ## Citing
 
 Cite `trajectories-of-change` as software via
-[CITATION.cff](https://github.com/raphschlatt/Trajectories_of_Change/blob/main/CITATION.cff),
-which GitHub renders through the "Cite this repository" button. Cite the
-framework paper if you discuss the approach or the measures:
+[CITATION.cff](https://github.com/raphschlatt/Trajectories_of_Change/blob/main/CITATION.cff)
+(GitHub renders it through the "Cite this repository" button) or the Zenodo
+concept DOI
+[https://doi.org/10.5281/zenodo.22084878](https://doi.org/10.5281/zenodo.22084878).
+Cite the framework paper if you discuss the approach or the measures:
 
 > Raphael Schlattmann and Malte Vogl (2024). *Trajectories of Change:
 > Approaches for Tracking Knowledge Evolution*. BHDC 2023: Big Historical
