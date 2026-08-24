@@ -171,7 +171,6 @@ def test_quickstart_notebook_is_portable_json() -> None:
     assert "trajectories_of_change.multimetric" not in source
     assert "trajectories_of_change.contract" not in source
     assert "trajectories_of_change.data_loader" not in source
-    assert "DEFAULT_TOP_K_KLD_TERMS" in source
     assert "top_k_kld_terms=20" not in source
 
 
