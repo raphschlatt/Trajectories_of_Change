@@ -1,0 +1,9 @@
+schema_version: 1
+run:
+  run_id: synthetic-oracle-v1-test
+producer:
+  name: trajectories-of-change-synthetic-oracle
+  version: 0.1.0
+reproducibility:
+  config_file: config_used.yaml
+  git_commit: synthetic-oracle

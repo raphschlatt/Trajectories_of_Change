@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use Trajectories of Change, please cite it using this metadata."
+title: "Trajectories of Change: KLD, Co-Citation, and Semantic-Density Metrics for Publication Trajectories"
+type: software
+authors:
+  - family-names: Schlattmann
+    given-names: Raphael
+    orcid: "https://orcid.org/0000-0002-2234-3720"
+    affiliation: "Technische Universität Berlin"
+  - family-names: Vogl
+    given-names: Malte
+    orcid: "https://orcid.org/0000-0002-2683-6610"
+    affiliation: "Max Planck Institute of Geoanthropology"
+version: "0.2.0"
+date-released: "2026-07-31"
+license: MIT
+repository-code: "https://github.com/raphschlatt/Trajectories_of_Change"
+url: "https://github.com/raphschlatt/Trajectories_of_Change"
+abstract: "Trajectories of Change is a research package for comparing author- and field-level publication trajectories using Own- and Referenced-Vocabulary KLD, outgoing Citation-Identity KLD, and standardized semantic-density metrics on publication/reference parquet datasets."
+keywords:
+  - bibliometrics
+  - co-citation-analysis
+  - digital-humanities
+  - kullback-leibler-divergence
+  - research-trajectories
+  - scholarly-metadata
+references:
+  - type: conference-paper
+    title: "Trajectories of Change: Approaches for Tracking Knowledge Evolution"
+    authors:
+      - family-names: Schlattmann
+        given-names: Raphael
+      - family-names: Vogl
+        given-names: Malte
+    year: 2024
+    conference:
+      name: "BHDC 2023: Big Historical Data Conference"
+    doi: "10.48550/arXiv.2501.00391"
+    url: "https://arxiv.org/abs/2501.00391"

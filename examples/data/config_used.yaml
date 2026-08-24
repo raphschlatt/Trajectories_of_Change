@@ -1,0 +1,8 @@
+run:
+  random_seed: 1729
+search:
+  query: synthetic oracle corpus for trajectories-of-change
+topic_model:
+  embedding_provider: synthetic
+  embedding_model: hand-authored-oracle
+  reduction_method: synthetic_2d_5d_10d

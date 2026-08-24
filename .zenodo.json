@@ -1,0 +1,51 @@
+{
+  "title": "Trajectories of Change: KLD, Co-Citation, and Semantic-Density Metrics for Publication Trajectories",
+  "upload_type": "software",
+  "description": "Trajectories of Change is a research package for comparing author- and field-level publication trajectories using Own- and Referenced-Vocabulary KLD, outgoing Citation-Identity KLD, and standardized semantic-density metrics on publication/reference parquet datasets. It provides a Python API, CLI, optional plotting helpers, deterministic synthetic oracle data, and a canonical two-Parquet data contract with optional provenance sidecars.",
+  "creators": [
+    {
+      "name": "Schlattmann, Raphael",
+      "orcid": "0000-0002-2234-3720",
+      "affiliation": "Technische Universität Berlin"
+    },
+    {
+      "name": "Vogl, Malte",
+      "orcid": "0000-0002-2683-6610",
+      "affiliation": "Max Planck Institute of Geoanthropology"
+    }
+  ],
+  "version": "0.2.0",
+  "publication_date": "2026-07-31",
+  "license": "MIT",
+  "language": "eng",
+  "access_right": "open",
+  "keywords": [
+    "bibliometrics",
+    "co-citation-analysis",
+    "digital-humanities",
+    "kullback-leibler-divergence",
+    "research-trajectories",
+    "scholarly-metadata",
+    "semantic-density"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://arxiv.org/abs/2501.00391",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "publication-conferencepaper"
+    },
+    {
+      "identifier": "https://github.com/raphschlatt/ads-bib",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/raphschlatt/ads-and",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "and_enabled": false,
+  "artifacts": [
+    {
+      "path": "publications.parquet",
+      "sha256": "fdca9e35e0f16011f12df17eff09577c43e7bbb3248d2dbd2e6eda7605bf8821"
+    },
+    {
+      "path": "references.parquet",
+      "sha256": "ebc1a43830ae51ea83728cde758af9d2cfae17cde338cea9a487e29ca088b01b"
+    }
+  ],
+  "counts": {
+    "publications": 340,
+    "references": 32
+  },
+  "oracle": {
+    "expected": {
+      "cocitation_high": [
+        "uid:citation_distinct",
+        "uid:correlated_distinct"
+      ],
+      "converging_negative_kld_slope": "uid:converging_distinct",
+      "density_geometric_trap": "uid:geometry_trap",
+      "density_increasing_neglog": "uid:density_shift",
+      "vocabulary_high": [
+        "uid:stable_vocab_distinct",
+        "uid:correlated_distinct"
+      ],
+      "vocabulary_spiky": "uid:spiky_vocab_distinct"
+    },
+    "profile": "test",
+    "seed": 1729,
+    "target_authors": {
+      "uid:citation_distinct": {
+        "display_name": "Citation Distinct, C.",
+        "scenario": "citation_distinct"
+      },
+      "uid:converging_distinct": {
+        "display_name": "Converging Distinct, N.",
+        "scenario": "converging_distinct"
+      },
+      "uid:correlated_distinct": {
+        "display_name": "Correlated Distinct, K.",
+        "scenario": "correlated_distinct"
+      },
+      "uid:density_shift": {
+        "display_name": "Density Shift, D.",
+        "scenario": "density_shift"
+      },
+      "uid:field_like": {
+        "display_name": "Field-Like, F.",
+        "scenario": "field_like"
+      },
+      "uid:geometry_trap": {
+        "display_name": "Geometry Trap, G.",
+        "scenario": "geometry_trap"
+      },
+      "uid:spiky_vocab_distinct": {
+        "display_name": "Spiky Vocabulary, S.",
+        "scenario": "spiky_vocab_distinct"
+      },
+      "uid:stable_vocab_distinct": {
+        "display_name": "Stable Vocabulary, V.",
+        "scenario": "stable_vocab_distinct"
+      }
+    },
+    "years": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009
+    ]
+  },
+  "producer": "trajectories-of-change-synthetic-oracle",
+  "producer_version": "0.1.0",
+  "run_id": "synthetic-oracle-v1-test",
+  "schema_version": 1
+}

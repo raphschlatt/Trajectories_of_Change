@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+
+jobs:
+  checks:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.12", "3.13", "3.14"]
+    runs-on: ${{ matrix.os }}
+    env:
+      UV_PYTHON: ${{ matrix.python }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+
+      - name: Install Python
+        run: uv python install ${{ matrix.python }}
+
+      - name: Install dependencies
+        run: uv sync --frozen --all-extras --group dev --python ${{ matrix.python }}
+
+      - name: Environment check
+        run: uv run python scripts/check_env.py
+
+      - name: Test
+        run: uv run pytest -q
+
+      - name: Compile
+        run: uv run python -m compileall src tests examples
+
+  package:
+    needs: checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+
+      - name: Install Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --frozen --all-extras --group dev --python 3.12
+
+      - name: Build
+        run: uv build
+
+      - name: Twine check
+        run: uv run python -m twine check dist/*
+
+      - name: CLI smoke
+        run: |
+          uv run toc --version
+          uv run toc validate examples/data/publications.parquet examples/data/references.parquet --auto-discover-sidecars
+          uv run toc metrics examples/data/publications.parquet examples/data/references.parquet \
+            --auto-discover-sidecars \
+            --assume-valid \
+            --target uid:stable_vocab_distinct \
+            --no-progress \
+            --out /tmp/toc_metrics_smoke.parquet
+
+      - name: Wheel smoke
+        run: |
+          uv venv /tmp/toc-wheel-smoke --python 3.12
+          WHEEL="$(ls dist/*.whl | head -n 1)"
+          uv pip install --python /tmp/toc-wheel-smoke/bin/python "$WHEEL[plotting]"
+          /tmp/toc-wheel-smoke/bin/python -c "import trajectories_of_change as toc; print(toc.__version__)"
+          /tmp/toc-wheel-smoke/bin/toc --version
+          /tmp/toc-wheel-smoke/bin/toc validate examples/data/publications.parquet examples/data/references.parquet --auto-discover-sidecars

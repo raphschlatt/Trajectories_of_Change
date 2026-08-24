@@ -1,0 +1,116 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "trajectories-of-change"
+version = "0.2.0"
+description = "Research package for author- and field-level trajectory metrics on publication/reference parquet datasets."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Raphael Schlattmann" },
+  { name = "Malte Vogl" }
+]
+maintainers = [
+  { name = "Raphael Schlattmann" }
+]
+keywords = [
+  "bibliometrics",
+  "co-citation-analysis",
+  "digital-humanities",
+  "kullback-leibler-divergence",
+  "research-trajectories"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: English",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+  "Topic :: Text Processing :: Linguistic"
+]
+dependencies = [
+  "numpy>=1.24",
+  "pandas>=2.0",
+  "PyYAML>=6.0",
+  "pyarrow>=12.0",
+  "scikit-learn>=1.3",
+  "scipy>=1.11",
+  "tqdm>=4.66"
+]
+
+[project.urls]
+Homepage = "https://github.com/raphschlatt/Trajectories_of_Change"
+Documentation = "https://github.com/raphschlatt/Trajectories_of_Change/tree/main/docs"
+Repository = "https://github.com/raphschlatt/Trajectories_of_Change"
+Issues = "https://github.com/raphschlatt/Trajectories_of_Change/issues"
+
+[project.scripts]
+toc = "trajectories_of_change.cli:main"
+
+[project.optional-dependencies]
+plotting = [
+  "kaleido>=0.2.1",
+  "plotly>=6.1.1"
+]
+notebooks = [
+  "ipykernel>=6.0",
+  "jupyter>=1.0",
+  "notebook>=6.5"
+]
+
+[dependency-groups]
+dev = [
+  "build>=1.2",
+  "hatchling>=1.25",
+  "pytest>=8.0",
+  "requests>=2.31",
+  "twine>=5.1"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/trajectories_of_change"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src/trajectories_of_change",
+  "/examples",
+  "/scripts/check_env.py",
+  "/scripts/generate_synthetic_oracle_data.py",
+  "/scripts/ops/check_release_version.py",
+  "/README.md",
+  "/LICENSE",
+  "/CITATION.cff",
+  "/CHANGELOG.md",
+  "/pyproject.toml"
+]
+exclude = [
+  "/.claude",
+  "/AGENTS.md",
+  "/archive",
+  "/data",
+  "/docs",
+  "/plots",
+  "/research",
+  "/runs",
+  "/notebooks",
+  "/tests",
+  "/build",
+  "/dist",
+  "/site",
+  "/**/__pycache__",
+  "/**/*.egg-info"
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
