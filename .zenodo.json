@@ -1,7 +1,7 @@
 {
-  "title": "Trajectories of Change: KLD, Co-Citation, and Semantic-Density Metrics for Publication Trajectories",
+  "title": "Trajectories of Change: Vocabulary, Citation-Identity, and Embedding-Density Measures for Publication Trajectories",
   "upload_type": "software",
-  "description": "Trajectories of Change is a research package for comparing author- and field-level publication trajectories using Own- and Referenced-Vocabulary KLD, outgoing Citation-Identity KLD, and standardized semantic-density metrics on publication/reference parquet datasets. It provides a Python API, CLI, optional plotting helpers, deterministic synthetic oracle data, and a canonical two-Parquet data contract with optional provenance sidecars.",
+  "description": "Trajectories of Change is a research package for comparing author- and field-level publication trajectories using Own- and Referenced-Vocabulary KLD, outgoing Citation-Identity KLD, and Embedding Density Estimation (EDE) on publication/reference Parquet datasets. It provides a Python API, CLI, optional plotting helpers, deterministic synthetic example data, and a canonical two-Parquet data contract with optional provenance sidecars.",
   "creators": [
     {
       "name": "Schlattmann, Raphael",
@@ -15,7 +15,7 @@
     }
   ],
   "version": "0.2.0",
-  "publication_date": "2026-07-31",
+  "publication_date": "2026-08-24",
   "license": "MIT",
   "language": "eng",
   "access_right": "open",

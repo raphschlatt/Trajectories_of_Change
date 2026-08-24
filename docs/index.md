@@ -11,8 +11,9 @@ Start here, depending on what you want to do:
   [CLI guide](cli.md) or `prepare_dataset_bundle(...)` from the
   [Python API](api.md).
 - **I want to understand the methods.** Read [methods](methods.md) for the
-  four metrics (Own Vocabulary, Referenced Vocabulary, Density, Citation
-  Identity), significance testing, and interpretation notes.
+  four measures (Own Vocabulary, Referenced Vocabulary, Citation Identity,
+  Embedding Density Estimation), significance testing, and interpretation
+  notes.
 
 Reference material:
 

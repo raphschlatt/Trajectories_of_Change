@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "trajectories-of-change"
 version = "0.2.0"
-description = "Research package for author- and field-level trajectory metrics on publication/reference parquet datasets."
+description = "Author- and field-level trajectory measures for publication/reference Parquet datasets."
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"

@@ -2,7 +2,7 @@
 
 ## Time Slices And Output Tables
 
-All metrics are computed per time slice: consecutive, non-overlapping windows
+All measures are computed per time slice: consecutive, non-overlapping windows
 of `window_size` years (default `2`) over the `Year` column, from the first
 to the last year in the corpus. A trailing window that would extend past the
 last year is dropped by default; `skip_incomplete_slices=False` keeps it as a
@@ -10,7 +10,7 @@ shortened final window. Within each slice, the target author's documents are
 compared against the field baseline: all documents in the corpus except the
 target's own.
 
-Each metric produces up to four tables, named the same way everywhere
+Each measure produces up to four tables, named the same way everywhere
 (`MetricResult` attributes, exported Parquet files, CLI outputs):
 
 - `sync`: the author's slice compared with the field's *same* slice — the

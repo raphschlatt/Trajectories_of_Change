@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use Trajectories of Change, please cite it using this metadata."
-title: "Trajectories of Change: KLD, Co-Citation, and Semantic-Density Metrics for Publication Trajectories"
+title: "Trajectories of Change: Vocabulary, Citation-Identity, and Embedding-Density Measures for Publication Trajectories"
 type: software
 authors:
   - family-names: Schlattmann
@@ -12,11 +12,11 @@ authors:
     orcid: "https://orcid.org/0000-0002-2683-6610"
     affiliation: "Max Planck Institute of Geoanthropology"
 version: "0.2.0"
-date-released: "2026-07-31"
+date-released: "2026-08-24"
 license: MIT
 repository-code: "https://github.com/raphschlatt/Trajectories_of_Change"
 url: "https://github.com/raphschlatt/Trajectories_of_Change"
-abstract: "Trajectories of Change is a research package for comparing author- and field-level publication trajectories using Own- and Referenced-Vocabulary KLD, outgoing Citation-Identity KLD, and standardized semantic-density metrics on publication/reference parquet datasets."
+abstract: "Trajectories of Change is a research package for comparing author- and field-level publication trajectories using Own- and Referenced-Vocabulary KLD, outgoing Citation-Identity KLD, and Embedding Density Estimation (EDE) on publication/reference Parquet datasets."
 keywords:
   - bibliometrics
   - co-citation-analysis
