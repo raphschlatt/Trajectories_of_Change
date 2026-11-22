@@ -101,6 +101,7 @@ def _diagnostics_by_slice(docs: pd.DataFrame) -> pd.DataFrame:
         )
         .sort_values("slice")
         .reset_index(drop=True)
+        .astype({"slice": "int64"})
     )
     return grouped
 

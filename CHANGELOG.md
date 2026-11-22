@@ -13,6 +13,15 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
   Previously the cap was taken over all terms, so a term repeated within a
   single document could bypass `min_docs_global_freq`. Runs without
   `max_vocab_size` or with `min_docs_global_freq=1` are unchanged.
+- Citation Identity diagnostics now follow the computed time slices:
+  `cocit_diagnostics_by_slice` aggregates per slice (window end year) instead
+  of per publication year, and the `slice` column of `cocit_diagnostics`
+  holds each document's slice label, empty for documents outside all slices.
+  The values change only for windows wider than one year or when documents
+  fall outside the analysed years.
+- `run_metric(metric="citation_identity")` now stores the requested
+  `window_size`, `start_year`, `end_year`, and `skip_incomplete_slices` in
+  the result instead of the defaults.
 
 ## [0.2.0] - 2026-08-24
 

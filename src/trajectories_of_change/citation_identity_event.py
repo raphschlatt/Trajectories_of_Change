@@ -502,6 +502,10 @@ class CitationIdentityKLD(FeatureKLDBase):
         _validate_index_config(index, config)
         if config.target_exclusion != "none" and not (target_author_uid or str(target_name).strip()):
             raise ValueError("target_name or target_author_uid is required")
+        self.start_year = start_year
+        self.end_year = end_year
+        self.window_size = int(window_size)
+        self.skip_incomplete_slices = bool(skip_incomplete_slices)
 
         years = index.publications["Year"].astype(int).to_numpy(copy=False)
         bibcodes = index.publications["Bibcode"].to_numpy()
@@ -633,10 +637,15 @@ class CitationIdentityKLD(FeatureKLDBase):
             "support_size_after_filters": int(support_size_total),
             "documents_without_pairs_after_filters": int(empty_documents),
         }
+        # Time-slice label (window end year) per document; documents outside
+        # every computed slice stay unassigned.
+        document_slices = pd.Series(pd.NA, index=range(n_docs), dtype="Int64")
+        for label, mask in matrix.slice_masks.items():
+            document_slices[mask] = int(label)
         diagnostics_documents = pd.DataFrame(
             {
                 "Bibcode": bibcodes,
-                "slice": years.astype(np.int64),
+                "slice": document_slices.array,
                 "is_target_document": target_mask_array.astype(bool),
                 "reference_mentions": rec_ref_mentions,
                 "analyzable_reference_mentions": rec_analyzable,

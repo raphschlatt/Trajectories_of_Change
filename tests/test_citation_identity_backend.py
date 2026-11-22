@@ -5,6 +5,7 @@ import pandas as pd
 import pytest
 
 import trajectories_of_change.citation_identity_event as ci_event
+from trajectories_of_change import MetricResult, run_metric
 from trajectories_of_change.citation_identity import CitationIdentityConfig
 from trajectories_of_change.citation_identity_event import (
     CitationIdentityEventIndex,
@@ -75,6 +76,66 @@ def _run_event(bundle, config: CitationIdentityConfig, *, target_author_uid: str
         top_k_kld_terms=None,
     )
     return result, index
+
+
+def _multi_year_bundle():
+    """Six publications over 2000-2004; two belong to the target."""
+    rows = [
+        ("p2000", 2000, "uid:target", ["r-einstein", "r-bohr"]),
+        ("p2001a", 2001, "uid:field", ["r-einstein", "r-bohr"]),
+        ("p2001b", 2001, "uid:field", ["r-einstein", "r-curie"]),
+        ("p2002", 2002, "uid:target", ["r-einstein", "r-bohr"]),
+        ("p2003", 2003, "uid:field", ["r-bohr", "r-curie"]),
+        ("p2004", 2004, "uid:field", ["r-einstein", "r-bohr"]),
+    ]
+    publications = pd.DataFrame(
+        [
+            {
+                "Bibcode": bibcode,
+                "Year": year,
+                "Author": [uid],
+                "AuthorUID": [uid],
+                "References": references,
+                "tokens": ["token"],
+                "embedding_2d_x": 0.0,
+                "embedding_2d_y": 0.0,
+            }
+            for bibcode, year, uid, references in rows
+        ]
+    )
+    references = pd.DataFrame(
+        [
+            {"Bibcode": "r-einstein", "Author": ["Einstein"], "AuthorUID": ["uid:einstein"]},
+            {"Bibcode": "r-bohr", "Author": ["Bohr"], "AuthorUID": ["uid:bohr"]},
+            {"Bibcode": "r-curie", "Author": ["Curie"], "AuthorUID": ["uid:curie"]},
+        ]
+    )
+    return build_dataset_bundle(publications, references)
+
+
+def _run_event_two_year_windows(bundle):
+    """Two-year windows over 2000-2004: 2000-2001 and 2002-2003, labelled by end year.
+
+    2004 falls into an incomplete window, which is dropped.
+    """
+    config = CitationIdentityConfig(counting="binary", target_exclusion="none")
+    index = CitationIdentityEventIndex.from_frames(bundle.publications, bundle.references, config=config)
+    target_mask = build_target_mask(
+        bundle.publications,
+        target_author_uid="uid:target",
+        allow_name_fallback=False,
+    ).to_numpy(dtype=bool)
+    return calculate_citation_identity_sync_kld_from_event_index(
+        index,
+        config=config,
+        target_author_uid="uid:target",
+        target_mask=target_mask,
+        window_size=2,
+        skip_incomplete_slices=True,
+        min_token_global_freq=1e-12,
+        min_docs_global_freq=1,
+        top_k_kld_terms=None,
+    )
 
 
 def _doc_diag(result, bibcode: str) -> pd.Series:
@@ -240,6 +301,49 @@ def test_document_fractional_identity_diagnostics_match_expected_pair_masses() -
     assert target_row["kept_pair_mass_weighted"] == pytest.approx(1.0)
     assert target_row["documents_without_pairs_after_filters"] == 0
     assert result.metadata["diagnostics_by_slice"].loc[0, "documents_without_pairs_after_filters"] == 0
+
+
+def test_diagnostics_by_slice_aggregate_over_the_computed_time_slices() -> None:
+    result = _run_event_two_year_windows(_multi_year_bundle())
+
+    by_slice = result.metadata["diagnostics_by_slice"]
+
+    assert by_slice["slice"].tolist() == [2001, 2003]
+    assert by_slice["documents"].tolist() == [3, 2]
+    assert by_slice["slice"].dtype == np.int64
+
+
+def test_document_diagnostics_name_the_time_slice_of_each_document() -> None:
+    result = _run_event_two_year_windows(_multi_year_bundle())
+
+    slices = result.metadata["diagnostics_documents"].set_index("Bibcode")["slice"]
+
+    assert slices["p2000"] == 2001
+    assert slices["p2001a"] == 2001
+    assert slices["p2003"] == 2003
+    assert pd.isna(slices["p2004"])
+
+
+def test_run_metric_stores_the_requested_time_window_for_citation_identity(tmp_path) -> None:
+    result = run_metric(
+        _multi_year_bundle(),
+        metric="citation_identity",
+        target_author_uid="uid:target",
+        window_size=5,
+        start_year=2000,
+        end_year=2004,
+        skip_incomplete_slices=False,
+        include_async=False,
+        run_welch=False,
+    )
+
+    loaded = MetricResult.load(result.save(tmp_path / "citation_identity"))
+
+    assert loaded.window_size == 5
+    assert loaded.config["window_size"] == 5
+    assert loaded.config["start_year"] == 2000
+    assert loaded.config["end_year"] == 2004
+    assert loaded.config["skip_incomplete_slices"] is False
 
 
 def test_counting_policies_are_distinct_for_repeated_reference_authors() -> None:
