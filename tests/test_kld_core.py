@@ -234,3 +234,29 @@ def test_sparse_moments_match_scalar_reference_for_edge_cases() -> None:
                 np.isclose(actual_sums[idx], expected_sums[idx], rtol=1e-12, atol=1e-12) for idx in expected_sums
             )
             assert all(np.isclose(actual_sq[idx], expected_sq[idx], rtol=1e-12, atol=1e-12) for idx in expected_sq)
+
+
+def test_max_vocab_size_keeps_only_terms_that_pass_the_document_threshold() -> None:
+    # "spam" is the most frequent term but occurs in a single document, so
+    # min_docs_global_freq=2 excludes it; the size cap must not bring it back.
+    corpus = pd.DataFrame(
+        [
+            {"Year": 2000, "tokens": ["spam"] * 10 + ["alpha", "beta"]},
+            {"Year": 2000, "tokens": ["alpha", "beta", "gamma"]},
+            {"Year": 2001, "tokens": ["alpha", "beta", "gamma"]},
+        ]
+    )
+    matrix = DocumentFeatureMatrix.from_token_frame(
+        corpus,
+        year_col="Year",
+        token_col="tokens",
+        start_year=None,
+        end_year=None,
+        window_size=1,
+        skip_incomplete_slices=False,
+        min_token_global_freq=1.0,
+        min_docs_global_freq=2,
+        max_vocab_size=2,
+    )
+
+    assert sorted(matrix.global_vocab) == ["alpha", "beta"]
