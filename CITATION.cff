@@ -42,3 +42,22 @@ references:
       name: "BHDC 2023: Big Historical Data Conference"
     doi: "10.48550/arXiv.2501.00391"
     url: "https://arxiv.org/abs/2501.00391"
+  - type: article
+    title: "Tracing individual knowledge trajectories in a changing field: the case of general relativity and gravitation"
+    authors:
+      - family-names: Schlattmann
+        given-names: Raphael
+      - family-names: Vogl
+        given-names: Malte
+    journal: "Frontiers in Complex Systems"
+    year: 2026
+    status: in-press
+    notes: "Accepted 16 November 2026."
+  - type: data
+    title: "Reproduction package for \"Tracing individual knowledge trajectories in a changing field: the case of general relativity and gravitation\""
+    authors:
+      - family-names: Schlattmann
+        given-names: Raphael
+    year: 2026
+    doi: "10.5281/zenodo.22726749"
+    url: "https://doi.org/10.5281/zenodo.22726749"
