@@ -236,7 +236,8 @@ class DocumentFeatureMatrix:
             if count >= float(min_token_global_freq) and docfreq.get(term, 0) >= int(min_docs_global_freq)
         ]
         if max_vocab_size and len(vocab) > int(max_vocab_size):
-            vocab = [term for term, _ in counts.most_common(int(max_vocab_size))]
+            admitted = Counter({term: counts[term] for term in vocab})
+            vocab = [term for term, _ in admitted.most_common(int(max_vocab_size))]
         vocab_index = pd.Index(vocab)
         vocab_lookup = {str(term): idx for idx, term in enumerate(vocab)}
         vocab_size = len(vocab)

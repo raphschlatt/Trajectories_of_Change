@@ -6,6 +6,14 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 
 ## [Unreleased]
 
+### Fixed
+
+- `max_vocab_size` for Own Vocabulary now keeps the most frequent terms among
+  those that pass `min_token_global_freq` and `min_docs_global_freq`.
+  Previously the cap was taken over all terms, so a term repeated within a
+  single document could bypass `min_docs_global_freq`. Runs without
+  `max_vocab_size` or with `min_docs_global_freq=1` are unchanged.
+
 ## [0.2.0] - 2026-08-24
 
 ### Added
