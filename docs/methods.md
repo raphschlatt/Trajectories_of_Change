@@ -108,48 +108,28 @@ regional growth would require an additional intensity-style analysis.
 Synchronous density evaluates target documents under the field KDE of the same
 time slice. Asynchronous density evaluates target slices against other field
 slices and can be used as a lead/lag or adoption diagnostic. Read its values
-with the cautions in the next section.
+with the caution in the next section.
 
 ## Reading Lead/Lag And Raw Density
 
-The asynchronous tables yield one lead/lag summary per target and measure
-(`vocab_kld_async_leadlag`, `ref_vocab_kld_async_leadlag`,
-`cocit_kld_async_leadlag`, `density_async_leadlag`). For each target slice
-the package takes the field slice with the smallest value, KLD or negative
-log density, and records the distance in years, field slice minus target
-slice. The summary is the mean of these distances. A positive value means
-that the closest field slices lie later than the target's own slices, a
-negative value that they lie earlier.
+For each target slice the package takes the field slice with the smallest
+value, KLD or negative log density, and records the distance in years, field
+slice minus target slice. `*_async_leadlag` is the mean of these distances.
 
-Do not read a raw lead/lag as "ahead of the field" or "behind the field",
-and do not read a raw `density_neglog_*` value or slope as a move towards
-the centre or the margin of the field. The package reports these values
-without a reference distribution, and several properties of a corpus shift
-them for all authors alike:
+Do not read a raw lead/lag as "ahead of the field" or "behind the field", or
+a raw `density_neglog_*` value as a move towards the centre or the margin of
+the field. The package reports both without a reference, and properties of
+the corpus shift them for all authors alike. In the corpus of the follow-up
+study, groups of randomly drawn field publications are in most cases closest
+to a later field slice in Own Vocabulary and to an earlier one in raw
+density, and raw density tends to rise for all authors because the field as
+a whole spreads over more of the embedding space.
 
-- **A random group is not closest to its own slice.** Field slices differ in
-  size, vocabulary coverage and spread. A group of publications drawn at
-  random from the field can therefore be closest to another slice than its
-  own. In the corpus of the follow-up study, such random groups drift
-  towards later field slices in Own Vocabulary.
-- **The first and last slices are one-sided.** A target slice at the start
-  of the corpus can only be matched to its own or a later field slice, one
-  at the end only to its own or an earlier one.
-- **Exact ties go to the earlier slice.** If two field slices are exactly
-  equally close, the earlier one is taken.
-- **Raw density follows the field.** If the field as a whole spreads over
-  more of the embedding space, as it does in the corpus of the follow-up
-  study, `density_neglog_*` tends to rise for all authors. A rising value
-  then shows the change of the field, not a move of the author.
-
-Raw values therefore need a reference before they carry a direction. The
-follow-up study adds two for its corpus: a benchmark of randomly drawn field
-publications from the same slices, against which an author's lead/lag is
-read, and density as a rank within each slice in place of the raw value.
-Both are analyses on top of the package outputs, not package functions.
-Their scripts and outputs are in the study's reproduction package,
+The follow-up study therefore adds two checks: a benchmark of randomly drawn
+field publications, and density as a rank within each slice. Both are
+analyses on top of the package outputs, not package functions. Their scripts
+and outputs are in the study's reproduction package,
 [https://doi.org/10.5281/zenodo.22726749](https://doi.org/10.5281/zenodo.22726749).
-Without such a reference, report lead/lag and raw density descriptively.
 
 ## Reporting And Robustness Checks
 

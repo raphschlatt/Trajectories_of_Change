@@ -176,42 +176,25 @@ in
 ## The follow-up study
 
 The four measures are applied to the history of general relativity and
-gravitation in a follow-up study, accepted by *Frontiers in Complex Systems*
-on 16 November 2026 (full reference under [Citing](#citing)).
-
-The paper names two measures differently. Its Written Vocabulary is Own
-Vocabulary here (`vocab_*`), and its Cited Vocabulary is Referenced
-Vocabulary (`ref_vocab_*`). The computations are the same.
-
-The study's analysis run called the package with the smoothing weight
-`lambda_param=0.05` instead of the default `0.5`, and with the asynchronous
-comparison switched on, which runs for several authors leave off by default.
-Its other settings are the package defaults.
+gravitation in a follow-up study (see [Citing](#citing)). Its analysis run
+used the smoothing weight `lambda_param=0.05` instead of the default `0.5`
+and switched the asynchronous comparison on; all other settings were the
+package defaults:
 
 ```python
 metrics = run_metrics(bundle, top_n=50, lambda_param=0.05, include_async=True)
 ```
 
-```bash
-uv run toc metrics prepared/publications.parquet prepared/references.parquet \
-  --top-n 50 \
-  --lambda-param 0.05 \
-  --include-async \
-  --run-dir runs/top50
-```
+The matching `toc metrics` flags are `--lambda-param 0.05 --include-async`.
 
-The package computes the four measures with their level, slope and lead/lag
-summaries. The study adds analyses on top of these outputs that are not
-package functions: a benchmark of randomly drawn field publications for
-lead/lag, density as a rank within each time slice, and bootstrap
-intervals. A raw lead/lag or density value needs such a reference before it
-is read as "ahead of" or "behind" the field, see
-[Reading lead/lag and raw density](https://github.com/raphschlatt/Trajectories_of_Change/blob/main/docs/methods.md#reading-leadlag-and-raw-density).
-
-The study's reproduction package holds the computed outputs of the analysis
-run, the identity of the corpus, the run configurations, and the scripts and
-outputs of the analyses added during peer review:
+The study's further analyses are not package functions: a benchmark of
+randomly drawn field publications for lead/lag, density as a rank within
+each time slice, and bootstrap intervals. Their scripts and outputs are in
+the study's reproduction package,
 [https://doi.org/10.5281/zenodo.22726749](https://doi.org/10.5281/zenodo.22726749).
+Without such a reference, do not read raw lead/lag or density values as
+"ahead of" or "behind" the field, see
+[docs/methods.md](https://github.com/raphschlatt/Trajectories_of_Change/blob/main/docs/methods.md#reading-leadlag-and-raw-density).
 
 ## Documentation
 
@@ -245,7 +228,6 @@ Its supplementary material specifies them formally:
 Resources:
 
 - Framework paper: [https://doi.org/10.48550/arXiv.2501.00391](https://doi.org/10.48550/arXiv.2501.00391)
-- Reproduction package of the follow-up study: [https://doi.org/10.5281/zenodo.22726749](https://doi.org/10.5281/zenodo.22726749)
 - Upstream corpus pipeline: [https://github.com/raphschlatt/ads-bib](https://github.com/raphschlatt/ads-bib)
 - Author disambiguation: [https://github.com/raphschlatt/ads-and](https://github.com/raphschlatt/ads-and)
 
