@@ -157,7 +157,7 @@ The compact multimetric table groups its headline columns by prefix:
 - Citation Identity: `cocit_*`.
 
 Level and slope columns are the primary cross-author comparison outputs. The
-level is the target's average across time slices and the slope is its trend,
+level is the target's median across time slices and the slope is its trend,
 so a positive `vocab_kld_all_slope` means the target's vocabulary moves away
 from the field over time. Coverage, document-count, and configuration
 columns are retained for interpretation and reproducibility. The headline columns are systematic —
