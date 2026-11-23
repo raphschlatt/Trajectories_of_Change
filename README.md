@@ -124,9 +124,13 @@ whose names are synthetic.
 |---|---|---|---|
 | `Bibcode` | Citation Identity, Referenced Vocabulary | `str` | `"SYNREF-COM-00"` |
 | `Author` | Citation Identity | `list[str]` | `["Reference COM 00"]` |
+| `author_uids` | Citation Identity, strongly recommended | `list[str]` | `["uid:ref_com_00"]` |
 | `tokens` | Referenced Vocabulary | `list[str]` | `["gravity", "gravity", "gravity", ...]` |
 
 Repeated tokens are meaningful, term frequency is encoded by repetition.
+Without `author_uids` in `references`, Citation Identity identifies cited
+authors by name and cannot recognise the target's own works among the
+references, so the default target exclusion removes nothing.
 Produce `tokens`, the embedding coordinates and `author_uids` with your own
 upstream pipeline. The pipeline behind the papers is public in
 [ads-bib](https://github.com/raphschlatt/ads-bib) and
@@ -186,6 +190,9 @@ metrics = run_metrics(bundle, top_n=50, lambda_param=0.05, include_async=True)
 ```
 
 The matching `toc metrics` flags are `--lambda-param 0.05 --include-async`.
+
+The study calls Own Vocabulary "Written Vocabulary" and Referenced
+Vocabulary "Cited Vocabulary"; the computations are the same.
 
 The study's further analyses are not package functions: a benchmark of
 randomly drawn field publications for lead/lag, density as a rank within
