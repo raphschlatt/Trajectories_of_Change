@@ -247,9 +247,11 @@ from trajectories_of_change.contract import (
 from trajectories_of_change.referenced_vocabulary import build_reference_token_cache
 ```
 
-- `validate_dataset_bundle(bundle)` — check a `DatasetBundle` against the contract
-  (required columns, types, reference integrity); raises with a precise message on
-  the first violation.
+- `validate_dataset_bundle(publications, references, strict=True)` — check the two
+  normalized tables against the contract (required columns, types, reference
+  integrity) and return a `ValidationReport` with errors, warnings, and the
+  measures the tables support; with `strict=True` it raises
+  `DatasetValidationError` listing every violation.
 - `normalize_publications_frame(df)` / `normalize_references_frame(df)` — canonicalize
   column names and coerce list/scalar types on a raw publications/references frame,
   returning the normalized frame.

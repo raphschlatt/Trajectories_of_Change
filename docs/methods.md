@@ -68,8 +68,10 @@ neither a long bibliography nor a long cited text dominates. The slice axis
 is the citing publication's year.
 
 The measure runs automatically in the consolidated metrics run when
-`references` carry a `tokens` column (otherwise it is skipped, like density
-without embedding columns). The default `--reference-policy inclusive` keeps
+`references` carry a `tokens` column; otherwise it is skipped. Density is not
+skipped in this way: without its embedding columns the run stops with a
+validation error, so select the other measures with `include` (`--metrics`
+on the command line). The default `--reference-policy inclusive` keeps
 target-authored references in the reference vocabulary; `external_only` drops
 them as a self-citation sensitivity check. Outputs use the `ref_vocab_`
 prefix (e.g. `ref_vocab_kld_all_level`).

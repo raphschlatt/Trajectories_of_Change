@@ -57,10 +57,9 @@ Default density needs the canonical 2D coordinates:
 
 - `embedding_2d_x` and `embedding_2d_y` are document coordinates from an
   embedding and projection pipeline of your choice. The follow-up study uses
-  transformer document embeddings reduced with PaCMAP; the accepted `UMAP-1`
-  and `UMAP-2` aliases cover coordinates exported under those names. The
-  package standardizes the coordinates and treats them as given. EDE values
-  are only comparable within one coordinate space.
+  transformer document embeddings reduced with PaCMAP. The package
+  standardizes the coordinates and treats them as given. EDE values are only
+  comparable within one coordinate space.
 
 Explicit higher-dimensional (nD) density is supported only when finite
 numeric coordinate columns are passed through `density_embedding_cols`.
