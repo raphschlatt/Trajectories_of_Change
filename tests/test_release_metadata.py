@@ -13,7 +13,7 @@ def test_release_metadata_check_accepts_current_version() -> None:
         [
             sys.executable,
             "scripts/ops/check_release_version.py",
-            "v0.2.0",
+            "v0.2.1",
         ],
         cwd=ROOT,
         check=False,
@@ -23,4 +23,4 @@ def test_release_metadata_check_accepts_current_version() -> None:
     )
 
     assert proc.returncode == 0, proc.stderr
-    assert "release metadata ok: v0.2.0" in proc.stdout
+    assert "release metadata ok: v0.2.1" in proc.stdout

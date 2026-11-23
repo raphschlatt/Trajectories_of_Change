@@ -153,7 +153,7 @@ def test_build_artifacts_have_clean_boundaries(tmp_path: Path) -> None:
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
-    assert imported.stdout.strip() == "0.2.0"
+    assert imported.stdout.strip() == "0.2.1"
 
 
 def test_quickstart_notebook_is_portable_json() -> None:
