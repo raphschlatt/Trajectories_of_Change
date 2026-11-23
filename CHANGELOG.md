@@ -6,6 +6,20 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-23
+
+### Changed
+
+- README, citation metadata, and `docs/methods.md` now refer to the accepted
+  follow-up study in *Frontiers in Complex Systems*: its title and status,
+  the settings of its analysis run, its reproduction package, and a caution
+  against reading raw lead/lag and density values as ahead of or behind the
+  field.
+- Documentation corrections: the level columns are medians; the follow-up
+  study uses PaCMAP; `validate_dataset_bundle` takes the two tables; a run
+  without embedding columns stops unless density is deselected;
+  `references.author_uids` is listed as an input of Citation Identity.
+
 ### Fixed
 
 - `max_vocab_size` for Own Vocabulary now keeps the most frequent terms among

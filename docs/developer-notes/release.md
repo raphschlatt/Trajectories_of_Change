@@ -17,7 +17,7 @@ uv run pytest -q
 uv run python -m compileall src tests examples
 uv build
 uv run python -m twine check dist/*
-uv run python scripts/ops/check_release_version.py v0.2.0
+uv run python scripts/ops/check_release_version.py v0.2.1
 ```
 
 Also smoke-test the CLI against the bundled synthetic oracle data:
