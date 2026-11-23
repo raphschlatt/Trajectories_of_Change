@@ -1,5 +1,11 @@
 # Methods
 
+The follow-up study (see the
+[README](../README.md#the-follow-up-study)) calls Own Vocabulary "Written
+Vocabulary" and Referenced Vocabulary "Cited Vocabulary"; the computations
+are the same. It cites version 0.2.0 of the package; version 0.2.1 does not
+change how the four measures are computed under the study's settings.
+
 ## Time Slices And Output Tables
 
 All measures are computed per time slice: consecutive, non-overlapping windows
@@ -15,9 +21,9 @@ Each measure produces up to four tables, named the same way everywhere
 
 - `sync`: the author's slice compared with the field's *same* slice — the
   main trajectory.
-- `async`: every author slice compared with every *other* field slice — a
-  pairwise matrix, useful as a lead/lag diagnostic. Off by default in
-  multimetric runs because it is substantially more expensive.
+- `async`: every author slice compared with every field slice, the same
+  slice included — a pairwise matrix, useful as a lead/lag diagnostic. Off by
+  default in multimetric runs because it is substantially more expensive.
 - `pointwise`: per-term (or per-pair) contributions behind each slice value —
   which terms carry the divergence.
 - `welch`: per-term Welch test results behind the significance summaries.
@@ -27,6 +33,8 @@ Each measure produces up to four tables, named the same way everywhere
 `KLD_all` is the full Kullback–Leibler divergence, computed in bits, between
 the target's and the field's distribution over the shared feature set of a
 time slice. It is the descriptive effect size used throughout the papers.
+For Own Vocabulary the feature set leaves out terms that occur fewer than
+twice in the whole corpus (`min_token_global_freq=2`).
 
 All distributional estimates are formed at slice level, not per document, and
 are smoothed with Jelinek–Mercer interpolation against a time-pooled field
@@ -55,7 +63,11 @@ Whenever a result is called significant, interpret it together with:
 
 The default `top_k_kld_terms=50`, `alpha=0.2`,
 `multiple_testing="fdr_bh"`, and `multiple_testing_scope="slice"` define an
-exploratory candidate screen, not final confirmatory inference.
+exploratory candidate screen, not final confirmatory inference. With the
+scope `slice`, p-values are adjusted within each slice in the synchronous
+comparison and within each target slice in the asynchronous one. The
+follow-up study writes `target_slice` for the latter; the package has no
+separate value of that name.
 
 ## Referenced Vocabulary
 
@@ -108,9 +120,9 @@ distribution stays similar, `density_neglog_*` need not change much. Absolute
 regional growth would require an additional intensity-style analysis.
 
 Synchronous density evaluates target documents under the field KDE of the same
-time slice. Asynchronous density evaluates target slices against other field
-slices and can be used as a lead/lag or adoption diagnostic. Read its values
-with the caution in the next section.
+time slice. Asynchronous density evaluates target slices against all field
+slices, the same slice included, and can be used as a lead/lag or adoption
+diagnostic. Read its values with the caution in the next section.
 
 ## Reading Lead/Lag And Raw Density
 
@@ -122,10 +134,14 @@ Do not read a raw lead/lag as "ahead of the field" or "behind the field", or
 a raw `density_neglog_*` value as a move towards the centre or the margin of
 the field. The package reports both without a reference, and properties of
 the corpus shift them for all authors alike. In the corpus of the follow-up
-study, groups of randomly drawn field publications are in most cases closest
-to a later field slice in Own Vocabulary and to an earlier one in raw
-density, and raw density tends to rise for all authors because the field as
-a whole spreads over more of the embedding space.
+study, groups of randomly drawn field publications are closest to a later
+field slice more often than to an earlier one in Own Vocabulary (44 against
+20 per cent of the cases; the other 36 per cent lie within one year) and
+mostly to an earlier one in raw density (68 per cent), and the field as a
+whole spreads over more of the embedding space over time (Table S10 and
+Figure S3 of the study's supplementary material). The raw density values of
+the study's 50 authors show no common trend: the slope of `density_neglog`
+is positive for 25 of them and negative for 25.
 
 The follow-up study therefore adds two checks: a benchmark of randomly drawn
 field publications, and density as a rank within each slice. Both are
@@ -215,6 +231,13 @@ Sensitivity runs should vary the assumptions explicitly:
 - `target_exclusion="all_docs"` for the main target-free baseline;
 - `citation_identity_counting="binary"` or `"multiplicity"`;
 - `citation_author_scope="all_authors"`.
+
+The counting switch also changes which pairs pass the global pair-mass
+threshold, because the threshold applies to the pair mass under the chosen
+counting. The follow-up study's counting comparison (its Tables S5 and S14)
+instead kept the pair set of the main run for all three countings. The
+switch alone does not do that; the lower-level `CitationIdentityKLD` accepts
+such a fixed set as `allowed_pair_keys`.
 
 Dropped-mass diagnostics are part of the method, not just logs. High
 self-loop mass, target-excluded mass, empty reference identities, or many

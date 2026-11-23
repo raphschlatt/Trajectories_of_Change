@@ -124,13 +124,15 @@ whose names are synthetic.
 |---|---|---|---|
 | `Bibcode` | Citation Identity, Referenced Vocabulary | `str` | `"SYNREF-COM-00"` |
 | `Author` | Citation Identity | `list[str]` | `["Reference COM 00"]` |
-| `author_uids` | Citation Identity, strongly recommended | `list[str]` | `["uid:ref_com_00"]` |
+| `author_uids` | Citation Identity, Referenced Vocabulary; strongly recommended | `list[str]` | `["uid:ref_com_00"]` |
 | `tokens` | Referenced Vocabulary | `list[str]` | `["gravity", "gravity", "gravity", ...]` |
 
 Repeated tokens are meaningful, term frequency is encoded by repetition.
 Without `author_uids` in `references`, Citation Identity identifies cited
 authors by name and cannot recognise the target's own works among the
-references, so the default target exclusion removes nothing.
+references, so the default target exclusion removes nothing. Referenced
+Vocabulary cannot recognise them either, so its `external_only` reference
+policy drops nothing.
 Produce `tokens`, the embedding coordinates and `author_uids` with your own
 upstream pipeline. The pipeline behind the papers is public in
 [ads-bib](https://github.com/raphschlatt/ads-bib) and
@@ -189,10 +191,20 @@ package defaults:
 metrics = run_metrics(bundle, top_n=50, lambda_param=0.05, include_async=True)
 ```
 
-The matching `toc metrics` flags are `--lambda-param 0.05 --include-async`.
+The matching `toc metrics` flags are
+`--top-n 50 --lambda-param 0.05 --include-async`.
 
 The study calls Own Vocabulary "Written Vocabulary" and Referenced
-Vocabulary "Cited Vocabulary"; the computations are the same.
+Vocabulary "Cited Vocabulary"; the computations are the same. In calls the
+two measures are named `own_vocab` and `ref_vocab`, and their output columns
+start with `vocab_` and `ref_vocab_`. The name `referenced_vocabulary`,
+which the study's materials also use, belongs to a module of the package and
+to folders of the study's run outputs; it is not accepted as a measure name.
+
+The study cites version 0.2.0 of the package. Version 0.2.1 does not change
+how the four measures are computed under the study's settings; its changes
+are listed in the
+[changelog](https://github.com/raphschlatt/Trajectories_of_Change/blob/main/CHANGELOG.md).
 
 The study's further analyses are not package functions: a benchmark of
 randomly drawn field publications for lead/lag, density as a rank within
@@ -202,6 +214,14 @@ the study's reproduction package,
 Without such a reference, do not read raw lead/lag or density values as
 "ahead of" or "behind" the field, see
 [docs/methods.md](https://github.com/raphschlatt/Trajectories_of_Change/blob/main/docs/methods.md#reading-leadlag-and-raw-density).
+
+The Citation Image, how the field cites the target, is not a package
+function either; its result tables are in the reproduction package. The
+package's overview figures (`plot_multimetric`) show three measures, without
+Referenced Vocabulary, and are not the figures of the study. The figure
+scripts in version 1 of the reproduction package draw the figures of the
+submitted manuscript: they label the two vocabulary measures "Own" and
+"Ref", and Figure 5 has one more panel than in the accepted article.
 
 ## Documentation
 

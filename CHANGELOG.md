@@ -6,6 +6,19 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 
 ## [Unreleased]
 
+### Changed
+
+- Documentation corrections after a comparison with the accepted follow-up
+  study. Corrected statements: the asynchronous comparison includes the same
+  field slice; in the study's corpus, random groups are closest to a later
+  slice more often than to an earlier one (not in most cases), and raw
+  density shows no common trend across the authors; the level is a median
+  also in the notebook; the study's `toc metrics` call needs `--top-n 50`.
+  New statements: the support threshold of Own Vocabulary, the `slice` scope
+  in the asynchronous comparison, the fixed pair set of the study's counting
+  comparison, the measure names used in calls, `references.author_uids` for
+  Referenced Vocabulary, and what the study adds outside the package.
+
 ## [0.2.1] - 2026-11-23
 
 ### Changed
