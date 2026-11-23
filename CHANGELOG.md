@@ -6,6 +6,11 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 
 ## [Unreleased]
 
+### Added
+
+- `docs/ads_query.md`: the ADS query behind the corpus of the follow-up
+  study, to which its supplementary material refers.
+
 ### Changed
 
 - Documentation corrections after a comparison with the accepted follow-up

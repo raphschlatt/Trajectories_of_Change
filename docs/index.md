@@ -22,6 +22,8 @@ Reference material:
   complete set).
 - [Data contract](data_contract.md) — required columns, aliases, sidecars.
 - [Methods](methods.md) — metric definitions and interpretation.
+- [ADS query](ads_query.md) — the search query behind the corpus of the
+  follow-up study.
 - For maintainers: [release checklist](developer-notes/release.md).
 
 These docs describe what the package accepts, computes, and returns.
